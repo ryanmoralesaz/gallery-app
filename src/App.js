@@ -6,6 +6,7 @@ import SearchForm from "./Components/SearchForm";
 import SearchButton from "./Components/SearchButton";
 import ImgList from "./Components/ImgList";
 import { Container, Button, Row, Col } from "reactstrap";
+import apiKey from "./config.js"
 
 export default class App extends Component {
   constructor() {
@@ -23,7 +24,7 @@ export default class App extends Component {
   performSearch = (query) => {
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=dc6zaTOxFJmzC`
+        `https://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=`+apiKey
       )
       .then(response => {
         this.setState({
