@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import SearchForm from "./Components/SearchForm";
 import SearchButton from "./Components/SearchButton";
 import ImgList from "./Components/ImgList";
-import { Container, Button, Row, Col } from "reactstrap";
-import apiKey from "./config.js"
+import { Container, Row } from "reactstrap";
+import apiKey from "./config.js";
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       imgs: [],
-      loading: true
+      loading: true,
     };
   }
 
@@ -24,19 +24,19 @@ export default class App extends Component {
   performSearch = (query) => {
     axios
       .get(
-        `https://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=`+apiKey
+        `https://api.giphy.com/v1/gifs/search?q=${query}&limit=24&api_key=${apiKey}`
       )
-      .then(response => {
+      .then((response) => {
         this.setState({
           imgs: response.data.data,
-          loading: false
+          loading: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Error fetching and parsing data", error);
       });
   };
-  buttonAt = buttonText => this.performSearch(buttonText);
+  buttonAt = (buttonText) => this.performSearch(buttonText);
   render() {
     console.log(this.state.imgs);
     return (
@@ -48,10 +48,12 @@ export default class App extends Component {
           </div>
         </div>
         <Row className="col">
-          <SearchButton handleButton={()=>this.buttonAt("monkey")} text="monkeys"/>
-          <SearchButton handleButton={()=>this.buttonAt("cat")} text="cats"/>
-          <SearchButton handleButton={()=>this.buttonAt("dog")} text="dogs"/>
-
+          <SearchButton
+            handleButton={() => this.buttonAt("monkey")}
+            text="monkeys"
+          />
+          <SearchButton handleButton={() => this.buttonAt("cat")} text="cats" />
+          <SearchButton handleButton={() => this.buttonAt("dog")} text="dogs" />
         </Row>
         <div>
           {this.state.loading ? (

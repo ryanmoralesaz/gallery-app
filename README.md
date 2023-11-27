@@ -1,1 +1,1 @@
-# flickr api search
+# GIPHY API image search app
